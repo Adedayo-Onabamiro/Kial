@@ -12,9 +12,9 @@ export const Navbar = () => {
   };
 
   return (
-    <div className='w-full h-auto border border-black'>
+    <div className='w-full h-auto '>
       <TopBanner></TopBanner>
-      <nav className="bg-transparent w-full md:px-8 z-20 border border-b-black ">
+      <nav className="bg-transparent w-full md:px-8 z-20 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           {/* Logo on the left */}
           <div className="flex items-center"> <span className="text-xl font-bold font-custom">KIAL</span> </div>

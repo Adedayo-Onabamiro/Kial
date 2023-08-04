@@ -16,7 +16,6 @@ export const Contents = () => {
 }
 
 
-
 export const CountdownTimer = ({ targetDate }) => {
   const calculateTimeLeft = () => {
     const difference = new Date(targetDate) - new Date();
@@ -46,10 +45,13 @@ export const CountdownTimer = ({ targetDate }) => {
 
   return (
     <div className="w-fit h-auto border border-black flex flex-row justify-evenly">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="text-center p-4">
-          <p className="text-sm  text-gray-500 uppercase">{unit}</p>
-          <p className="text-4xl font-bold">{value.toString().padStart(2, '0')}</p>
+      {Object.entries(timeLeft).map(([unit, value], index, arr) => (
+        <div key={unit} className="text-center py-4 px-1">
+          <p className="text-sm text-gray-500 uppercase">{unit}</p>
+          <p className="text-4xl font-bold">
+            {value.toString().padStart(2, '0')}
+            {index !== arr.length - 1 && <span className="px-1">:</span>}
+          </p>
         </div>
       ))}
     </div>

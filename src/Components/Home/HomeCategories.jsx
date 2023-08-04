@@ -1,11 +1,6 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import React, { useRef, useState,useEffect } from 'react';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-// import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export const HomeCategories = () => {
   const categories = [
@@ -21,8 +16,8 @@ export const HomeCategories = () => {
   ];
 
   return (
-    <div className="w-10/12 h-96 border-8 border-black flex flex-row items-center justify-between">
-      <div className="border-gray-400 border-r w-auto h-full flex flex-col">
+    <div className="w-10/12 h-96 flex flex-row items-center justify-between">
+      <div className="w-auto h-full flex flex-col">
         {categories.map((category, index) => (
           <a
             key={index}
@@ -33,9 +28,8 @@ export const HomeCategories = () => {
           </a>
         ))}
       </div>
-      <div className=" w-4/5 h-full border-2 border-red-500">
+      <div className=" w-4/5 h-full">
         <Slideshow></Slideshow>
-        {/* <AutoSlider></AutoSlider> */}
       </div>
     </div>
   );
@@ -58,28 +52,28 @@ export const HomeCatSliderItem = (props) => {
 
 const categories = [
   {
-    imgSrc: "./img/apple.png",
+    imgSrc: "./apple.png",
     title: "iPhone 14 Series",
-    logo: "./img/applelogo.png",
+    logo: "./applelogo.png",
   },
   {
-    imgSrc: "./img/apple.png",
+    imgSrc: "./apple.png",
     title: "iPhone 13 Series",
-    logo: "./img/applelogo.png",
+    logo: "./applelogo.png",
   },
   {
-    imgSrc: "./img/apple.png",
+    imgSrc: "./apple.png",
     title: "iPhone 12 Series",
-    logo: "./img/applelogo.png",
+    logo: "./applelogo.png",
   },
   {
-    imgSrc: "./img/apple.png",
+    imgSrc: "apple.png",
     title: "iPhone 11 Series",
-    logo: "./img/applelogo.png",
+    logo: "applelogo.png",
   },
 ];
 
-export const Slideshow = () => {
+const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -92,24 +86,20 @@ export const Slideshow = () => {
 
   return (
     <div className="w-full h-full relative rounded-lg shadow-lg">
-      <img
-        src={categories[currentSlide].imgSrc}
-        alt={`Slide ${currentSlide + 1}`}
-        className="rounded-lg"
+      <HomeCatSliderItem
+        imgSrc={categories[currentSlide].imgSrc}
+        title={categories[currentSlide].title}
+        logo={categories[currentSlide].logo}
       />
-      <div className="absolute left-0 bottom-0 w-full h-4 flex justify-center items-center">
+      <div className="absolute left-0 bottom-2 w-full h-4 flex justify-center items-center">
         {categories.map((category, index) => (
           <div
             key={index}
-            className={`w-4 h-4 rounded-full mx-1 ${
-              index === currentSlide ? "bg-gray-800" : "bg-gray-400"
+            className={`w-4 h-4 rounded-full mx-1 border border-white ${
+              index === currentSlide ? "bg-red-600" : "bg-gray-400"
             }`}
           />
         ))}
-      </div>
-      <div className="absolute left-0 bottom-0 w-full bg-black text-white p-4">
-        <h2 className="text-lg font-semibold">{categories[currentSlide].title}</h2>
-        <img src={categories[currentSlide].logo} alt="Logo" className="w-10 h-10" />
       </div>
     </div>
   );
