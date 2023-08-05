@@ -70,6 +70,15 @@ export const Contents = () => {
     <div className='border border-red-500 h-auto w-full my-10 flex flex-col items-end'>
       <Todays items={items}></Todays>
       <Categories></Categories>
+      <ThisMonth></ThisMonth>
+      <div className='h-90 w-11/12 mx-auto flex flex-row bg-black'>
+          <div className='w-1/2 bg-green flex flex-col items-start justify-center'>
+            <p className='text-green-700 text-xl font-bold'> Categories </p>
+            <p className='text-4xl font-bold text-white'>Enhance Your Music Experience</p>
+            <button className='bg-green-500 rounded text-white font-semibold py-2 px-8'>Buy Now!</button>
+          </div>
+          <div className='w-1/2 border flex items-center justify-center'> <img src='./img/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png' className='object-fit w-96 h-auto py-10' /> </div>
+      </div>
     </div>
   )
 }
@@ -230,7 +239,7 @@ const CategoriesSlider = ({ CategoriesItems }) => {
 
 const CategoriesSliderItems = ({ imgSrc, title }) => {
   return (
-    <div className="border p-6 flex flex-col items-center justify-center">
+    <div className="border border-gray-700 p-6 flex flex-col items-center justify-center">
       <img className="object-fit h-20 w-20" src={imgSrc} alt={title} />
       <p className="text-black"> {title} </p>
     </div>
@@ -267,19 +276,113 @@ export const Categories = () => {
   ];
   
   return (
-    <div className="h-auto w-11/12 my-10 flex flex-col">
-      <div className="w-11/2 h-11 flex flex-row items-center">
-        <div className="h-full w-6 bg-red-600 rounded-lg"></div>
-        <p className="text-red-600 text-lg font-semibold mx-3"> Categories </p>
-      </div>
-      <div className="w-auto h-auto flex flex-row items-end my-2">
-        <h1 className="text-3xl font-bold md:mr-9"> Browse By Category </h1>
-      </div>
-      <div className="my-8 w-11/12 h-full">
-        <CategoriesSlider CategoriesItems={CategoriesItems} /> 
+    <div className="h-auto w-full my-10 flex flex-col items-center justify-center">
+      <div className='w-10/12'>
+        <div className="w-full h-11 flex flex-row items-center">
+          <div className="h-full w-6 bg-red-600 rounded-lg"></div>
+          <p className="text-red-600 text-lg font-semibold mx-3"> Categories </p>
+        </div>
+        <div className="w-auto h-auto flex flex-row items-end my-2">
+          <h1 className="text-3xl font-bold md:mr-9"> Browse By Category </h1>
+        </div>
+        <div className="my-8 h-full">
+          <CategoriesSlider CategoriesItems={CategoriesItems} /> 
+        </div>
       </div>
     </div>
   );
 };
 
 // categories section code Ends
+
+// This Month section code Starts
+
+export const ThisMonth = () => {
+  const items = [
+    {
+      imgSrc: './img/p1.png',
+      title: 'Body Louvre',
+      originalPrice: 50,
+      discountedPrice: 32,
+      stars: 4,
+      reviewCount: 80,
+    },
+    {
+      imgSrc: './img/p2.png',
+      title: 'KeyBoard',
+      originalPrice: 80,
+      discountedPrice: 622,
+      stars: 5,
+      reviewCount: 20,
+    },
+    {
+      imgSrc: './img/p3.png',
+      title: 'Mia Gony',
+      originalPrice: 50,
+      discountedPrice: 32,
+      stars: 4,
+      reviewCount: 80,
+    },
+    {
+      imgSrc: './img/p4.png',
+      title: 'SuriMola',
+      originalPrice: 230,
+      discountedPrice: 128,
+      stars: 3,
+      reviewCount: 60,
+    },
+    {
+      imgSrc: './img/p1.png',
+      title: 'Body Louvre',
+      originalPrice: 50,
+      discountedPrice: 32,
+      stars: 4,
+      reviewCount: 80,
+    },
+    {
+      imgSrc: './img/p4.png',
+      title: 'SuriMola',
+      originalPrice: 230,
+      discountedPrice: 128,
+      stars: 3,
+      reviewCount: 60,
+    },
+    {
+      imgSrc: './img/p1.png',
+      title: 'Body Louvre',
+      originalPrice: 50,
+      discountedPrice: 32,
+      stars: 4,
+      reviewCount: 80,
+    },
+    
+  ];
+  
+  // Slice the first 4 items from the array
+  const itemsToShow = items.slice(0, 4);
+
+  return (
+    <div className='h-auto w-full my-10 items-center justify-center flex flex-col border'>
+      <div className='w-10/12'>
+        <div className='w-full h-11 flex flex-row items-center'>
+          <div className='h-full w-6 bg-red-600 rounded-lg'></div>
+          <p className='text-red-600 text-lg font-semibold mx-3'> This Month </p>
+        </div>
+        <div className='h-auto flex flex-row items-end my-2 justify-between'>
+          <h1 className='text-3xl font-bold md:mr-9'>Best Selling Products</h1>
+          <button className='bg-red-600 px-4 py-2 rounded-lg text-white'>View All</button>
+        </div>
+        <div className='my-8 ml-10 w-auto flex items-center justify-center'>
+          {itemsToShow.map((item, index) => (
+            <div key={index} className='w-80 mr-2'>
+              <StoreItemCard {...item} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// This Month section code Ends
+
