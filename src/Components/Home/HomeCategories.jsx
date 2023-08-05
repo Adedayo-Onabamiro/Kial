@@ -91,7 +91,7 @@ const Slideshow = () => {
         title={categories[currentSlide].title}
         logo={categories[currentSlide].logo}
       />
-      <div className="absolute left-0 bottom-2 w-full h-4 flex justify-center items-center">
+      <div className="absolute left-0 bottom-8 w-full h-4 flex justify-center items-center">
         {categories.map((category, index) => (
           <div
             key={index}
