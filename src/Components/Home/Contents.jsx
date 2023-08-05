@@ -4,81 +4,90 @@ import { StoreItemCard } from '../General/StoreItemCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
+const items = [
+  {
+    imgSrc: './img/p1.png',
+    title: 'Body Louvre',
+    originalPrice: 50,
+    discountedPrice: 32,
+    stars: 4,
+    reviewCount: 80,
+  },
+  {
+    imgSrc: './img/p2.png',
+    title: 'KeyBoard',
+    originalPrice: 80,
+    discountedPrice: 622,
+    stars: 5,
+    reviewCount: 20,
+  },
+  {
+    imgSrc: './img/p3.png',
+    title: 'Mia Gony',
+    originalPrice: 50,
+    discountedPrice: 32,
+    stars: 4,
+    reviewCount: 80,
+  },
+  {
+    imgSrc: './img/p4.png',
+    title: 'SuriMola',
+    originalPrice: 230,
+    discountedPrice: 128,
+    stars: 3,
+    reviewCount: 60,
+  },
+  {
+    imgSrc: './img/p1.png',
+    title: 'Body Louvre',
+    originalPrice: 50,
+    discountedPrice: 32,
+    stars: 4,
+    reviewCount: 80,
+  },
+  {
+    imgSrc: './img/p4.png',
+    title: 'SuriMola',
+    originalPrice: 230,
+    discountedPrice: 128,
+    stars: 3,
+    reviewCount: 60,
+  },
+  {
+    imgSrc: './img/p1.png',
+    title: 'Body Louvre',
+    originalPrice: 50,
+    discountedPrice: 32,
+    stars: 4,
+    reviewCount: 80,
+  },
+  
+];
 
 export const Contents = () => {
-  const items = [
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p2.png',
-      title: 'KeyBoard',
-      originalPrice: 80,
-      discountedPrice: 622,
-      stars: 5,
-      reviewCount: 20,
-    },
-    {
-      imgSrc: './img/p3.png',
-      title: 'Mia Gony',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p4.png',
-      title: 'SuriMola',
-      originalPrice: 230,
-      discountedPrice: 128,
-      stars: 3,
-      reviewCount: 60,
-    },
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p4.png',
-      title: 'SuriMola',
-      originalPrice: 230,
-      discountedPrice: 128,
-      stars: 3,
-      reviewCount: 60,
-    },
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    
-  ];
   
   return (
-    <div className='border border-red-500 h-auto w-full my-10 flex flex-col items-end'>
+    <div className='h-auto w-full my-10 flex flex-col items-end'>
       <Todays items={items}></Todays>
       <Categories></Categories>
       <ThisMonth></ThisMonth>
-      <div className='h-90 w-11/12 mx-auto flex flex-row bg-black'>
-          <div className='w-1/2 bg-green flex flex-col items-start justify-center'>
+      <div className='p-10 w-11/12 mx-auto flex flex-row bg-black'>
+          <div className='w-1/2 bg-green flex flex-col items-start justify-evenly'>
             <p className='text-green-700 text-xl font-bold'> Categories </p>
-            <p className='text-4xl font-bold text-white'>Enhance Your Music Experience</p>
-            <button className='bg-green-500 rounded text-white font-semibold py-2 px-8'>Buy Now!</button>
+            <p className='text-6xl font-semibold text-white md:w-4/5'>Enhance Your Music Experience</p>
+            <div className='flex flex-row'> 
+              <div className='flex flex-col bg-white items-center justify-center rounded-full h-20 w-20 p-2 m-2'> <p className='font-bold text-xl'>23</p> <p className='font-semibold'>Hours</p> </div> 
+              <div className='flex flex-col bg-white items-center justify-center rounded-full h-20 w-20 p-2 m-2'> <p className='font-bold text-xl'>05</p> <p className='font-semibold'>Days</p> </div> 
+              <div className='flex flex-col bg-white items-center justify-center rounded-full h-20 w-20 p-2 m-2'> <p className='font-bold text-xl'>59</p> <p className='font-semibold'>Minutes</p> </div> 
+              <div className='flex flex-col bg-white items-center justify-center rounded-full h-20 w-20 p-2 m-2'> <p className='font-bold text-xl'>35</p> <p className='font-semibold'>Seconds</p> </div> 
+            </div>
+            <button className='bg-green-500 rounded text-white font-semibold py-3 px-8 my-x'>Buy Now!</button>
           </div>
-          <div className='w-1/2 border flex items-center justify-center'> <img src='./img/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png' className='object-fit w-96 h-auto py-10' /> </div>
+          <div className='w-1/2 flex items-center justify-center'> <img src='./img/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png' className='object-fit h-[370px] w-auto h-auto py-10' /> </div>
       </div>
+      <ExploreProducts></ExploreProducts>
+      <NewArrival></NewArrival>
+      <Attributes></Attributes>
     </div>
   )
 }
@@ -386,3 +395,130 @@ export const ThisMonth = () => {
 
 // This Month section code Ends
 
+//ExploreProductsGrid Starts
+
+export const ExploreProducts = () => {
+  
+  return (
+    <div className="h-auto w-full my-10 flex flex-col items-center justify-center">
+    <div className='w-10/12'>
+      <div className="w-full h-11 flex flex-row items-center">
+        <div className="h-full w-6 bg-red-600 rounded-lg"></div>
+        <p className="text-red-600 text-lg font-semibold mx-3"> Our Products </p>
+      </div>
+      <div className="w-auto h-auto flex flex-row items-end my-2">
+        <h1 className="text-3xl font-bold md:mr-9"> Explore Our Products </h1>
+      </div>
+      <div className="my-8 h-full flex">
+        <ExploreProductsGrid items={items} />
+      </div>
+    </div>
+  </div>
+  );
+}
+
+export const ExploreProductsGrid = ({ items }) => {
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {items.map((item) => (
+        <div key={item.id} className="p-4">
+          <StoreItemCard {...item} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
+//New Arrival start
+
+export const NewArrival = () => {
+  return (
+    <div className="h-auto w-full my-10 flex flex-col items-center justify-center">
+    <div className='w-10/12'>
+      <div className="w-full h-11 flex flex-row items-center">
+        <div className="h-full w-6 bg-red-600 rounded-lg"></div>
+        <p className="text-red-600 text-lg font-semibold mx-3"> Featured </p>
+      </div>
+      <div className="w-auto h-auto flex flex-row items-end my-2"> <h1 className="text-3xl font-bold md:mr-9"> New Arrival </h1> </div>
+      
+      <div className="my-8 h-full flex border border-black">
+        <div className='w-11/12 h-full bg-black flex'>
+          <div className="relative w-full h-[600px] bg-contain bg-center" style={{ backgroundImage: 'url("./img/ps5-slim-goedkope-playstation_large 1.png")' }}>
+            <div className="absolute bottom-0 left-0 p-4">
+              <h1 className="text-white text-4xl font-bold">Header</h1>
+              <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
+              <p className="text-white text-sm mt-2">Third</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='w-11/12 h-full flex flex-col justify-between ml-4'>
+          <div className='flex flex-row justify-between mb-4'>
+            <div className="relative w-full h-[300px] bg-contain bg-center" style={{ backgroundImage: 'url("./img/attractive-woman-wearing-hat-posing-black-background 1.png")' }}>
+              <div className="absolute bottom-0 left-0 p-4">
+                <h1 className="text-white  text-4xl font-bold">Header</h1>
+                <h2 className="text-white  text-2xl font-bold mt-2">Part One</h2>
+                <p className="text-white  text-sm mt-2">Third</p>
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div className="relative w-11/12 h-[300px] bg-black object-contain bg-contain bg-center" style={{ backgroundImage: 'url("./img/69-694768_amazon-echo-png-clipart-transparent-amazon-echo-png 1.png")' }}>
+              <div className="absolute bottom-0 left-0 p-4">
+                <h1 className="text-white text-4xl font-bold">Header</h1>
+                <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
+                <p className="text-white text-sm mt-2">Third</p>
+              </div>
+            </div>
+
+            <div className="relative w-11/12 h-[300px] bg-contain bg-black bg-center" style={{ backgroundImage: 'url("./img/652e82cd70aa6522dd785109a455904c.png")' }}>
+              <div className="absolute bottom-0 left-0 p-4">
+                <h1 className="text-white text-4xl font-bold">Header</h1>
+                <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
+                <p className="text-white text-sm mt-2">Third</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    </div>
+  </div>
+  );
+}
+
+export const Attributes = () => {
+  return (
+    <div className="flex justify-center w-full items-center">
+      <div className='w-10/12 flex flex-row justify-between'>
+
+      <div className="w-1/3 p-4 rounded-lg m-2 flex flex-col items-center justify-center text-center">
+        <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
+          <img src="./img/icon-delivery.png" alt="Happy Icon" className="w-10 h-10" />
+        </div>
+        <h2 className="text-xl font-bold mt-2">FREE AND FAST DELIVERY</h2>
+        <p className="text-sm text-gray-600">Free delivery for all orders over $140</p>
+      </div>
+
+      <div className="w-1/3 p-4 rounded-lg mx-2 flex flex-col items-center justify-center text-center">
+        <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
+          <img src="./img/Icon-Customer service.png" alt="Happy Icon" className="w-10 h-10" />
+        </div>
+        <h2 className="text-xl font-bold mt-2">24/7 CUSTOMER SERVICE</h2>
+        <p className="text-sm text-gray-600">Friendly 24/7 customer support</p>
+      </div>
+
+      <div className="w-1/3 p-4 rounded-lg mx-2 flex flex-col items-center justify-center text-center">
+        <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
+          <img src="./img/Icon-secure.png" alt="Happy Icon" className="w-10 h-10" />
+        </div>
+        <h2 className="text-xl font-bold mt-2">MONEY BACK GUARANTEE</h2>
+        <p className="text-sm text-gray-600">We reurn money within 30 days</p>
+      </div>
+      </div>
+    </div>
+  )
+}
