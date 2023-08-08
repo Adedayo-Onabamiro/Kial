@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart, faShoppingCart, faBars } from '@fortawesome/free-solid-svg-icons';
 import { TopBanner } from './TopBanner';
+import { Link } from 'react-router-dom';
 
 
 export const Navbar = () => {
@@ -45,10 +46,10 @@ export const Navbar = () => {
 
           <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${showMenu ? '' : 'hidden'}`} id="navbar-sticky" >
             <ul className={`flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-transparent md:flex-row md:space-x-8 md:mt-0 md:border-0 ${showMenu ? '' : 'hidden'} md:flex`}>
-              <li>  <a href="#" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} aria-current="page"> Home </a> </li>
-              <li> <a href="#" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Contact </a> </li>
-              <li> <a href="#" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > About </a> </li>
-              <li> <a href="#" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Signup </a> </li>
+              <li> <Link to="/Home" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} aria-current="page"> Home </Link> </li>
+              <li> <Link to="/" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Contact </Link> </li>
+              <li> <Link to="/" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > About </Link> </li>
+              <li> <Link to="/SignUp" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Signup </Link> </li>
             </ul>
           </div>
 
