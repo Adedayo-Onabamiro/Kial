@@ -11,7 +11,7 @@ export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, s
     };
   
     return (
-      <div className="w-86 bg-gray-100 relative ">
+      <div className="w-86 bg-gray-200 relative ">
         <div className="overflow-hidden flex items-center justify-center">
           <img src={imgSrc} alt="Item" className="h-52 w-full py-10 object-contain" />
           <div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-lg"> -35% </div>

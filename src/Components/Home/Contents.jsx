@@ -74,7 +74,7 @@ const items = [
 export const Contents = () => {
   
   return (
-    <div className='h-auto w-full my-10 flex flex-col items-end border border-black'>
+    <div className='h-auto w-full my-10 flex flex-col items-end'>
       <Todays items={items}></Todays>
       <Categories></Categories>
       <ThisMonth></ThisMonth>
@@ -146,63 +146,34 @@ export const Todays =({items}) => {
   const targetDate = '2023-12-31T00:00:00'; // Set your target date here
 
   return (
-    <div className='h-auto w-11/12 my-10 flex flex-col  border border-black'>
+    <div className='h-auto w-11/12 my-10 flex flex-col'>
         <div className='w-full h-11 flex flex-row items-center'> <div className='h-full w-6 bg-red-600 rounded-lg'></div> <p className='text-red-600 text-lg font-semibold mx-3'>Today's</p> </div>
         <div className='w-auto h-auto flex flex-row items-end my-2'> <h1 className='text-3xl font-bold md:mr-9'>Flash Sales</h1> <CountdownTimer targetDate={targetDate} /> </div>
         <div className='my-8 w-full flex items-center justify-center'>
-           {/* <StoreItemSlider items={items} />  */}
+           <StoreItemSlider items={items} /> 
            </div>
         <div className='w-full h-auto flex items-center justify-center'> <button className='bg-red-600 px-4 py-2 text-white'>View All Products</button> </div>
     </div>
   )
 }
 
-export const StoreItemSlider = ({ items }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
 
-  const numSlides = Math.ceil(items.length / itemsPerPage);
-  const showPrevButton = currentIndex > 0;
-  const showNextButton = currentIndex < numSlides - 1;
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, numSlides - 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const sliderTransform = `translateX(-${currentIndex * (100 / numSlides)}%)`;
+const StoreItemSlider = ({ items }) => {
 
   return (
-    <div className="relative w-full overflow-hidden">
-      <div className="flex transition-transform ease-in-out duration-300" style={{ transform: sliderTransform }}>
-        {items.map((item, index) => (
-          <div key={index} className="w-80 mr-4">
-            <StoreItemCard {...item} />
-          </div>
-        ))}
-      </div>
-      {showPrevButton && (
-        <button
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-200 px-3 py-2 rounded-lg"
-          onClick={prevSlide}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} className="text-gray-500" />
-        </button>
-      )}
-      {showNextButton && (
-        <button
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-200 px-3 py-2 rounded-lg"
-          onClick={nextSlide}
-        >
-          <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-        </button>
-      )}
+    <div className="cards-container flex bg-transparent py-1 space-x-4 relative overflow-x-auto no-scrollbar">
+      {items.map((item, index) => (
+        <div key={index} className="w-80 flex-shrink-0">
+          <StoreItemCard {...item} />
+        </div>
+      ))}
     </div>
   );
 };
+
+
+
+
 
 // todays section code ends
 
@@ -238,7 +209,7 @@ export const Categories = () => {
   ];
   
   return (
-    <div className="h-auto w-full my-10 flex flex-col items-center justify-center  border border-black">
+    <div className="h-auto w-full my-10 flex flex-col items-center justify-center ">
       <div className='w-10/12'>
         <div className="w-full h-11 flex flex-row items-center">
           <div className="h-full w-6 bg-red-600 rounded-lg"></div>
@@ -385,7 +356,7 @@ export const ExploreProducts = () => {
 export const ExploreProductsGrid = ({ items }) => {
 
   return (
-    <div className="border border-black w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {items.map((item) => (
         <div key={item.id} className="p-4">
           <StoreItemCard {...item} />
@@ -403,48 +374,59 @@ export const NewArrival = () => {
     <div className="h-auto w-full my-10 flex flex-col items-center justify-center">
     <div className='w-10/12'>
       <div className="w-full h-11 flex flex-row items-center">
-        <div className="h-full w-6 bg-red-600 rounded-lg"></div>
+        <div className="h-full w-6 rounded-lg bg-red-600"></div>
         <p className="text-red-600 text-lg font-semibold mx-3"> Featured </p>
       </div>
       <div className="w-auto h-auto flex flex-row items-end my-2"> <h1 className="text-3xl font-bold md:mr-9"> New Arrival </h1> </div>
       
-      <div className="my-8 h-full flex border border-black">
-        <div className='w-11/12 h-full bg-black flex'>
-          <div className="relative w-full h-[600px] bg-contain bg-center" style={{ backgroundImage: 'url("./img/ps5-slim-goedkope-playstation_large 1.png")' }}>
-            <div className="absolute bottom-0 left-0 p-4">
-              <h1 className="text-white text-4xl font-bold">Header</h1>
-              <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
-              <p className="text-white text-sm mt-2">Third</p>
-            </div>
+      <div className="my-8 h-full flex flex-col md:flex-row">
+      <div className="w-11/12 h-full bg-black flex rounded-lg">
+        <div className="relative w-full h-[600px]">
+          <img src="./img/ps5-slim-goedkope-playstation_large 1.png" alt="PlayStation 5" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  h-4/5 object-contain" />
+          <div className="absolute bottom-0 left-0 p-4">
+            <h1 className="text-white text-4xl font-bold">PlayStation 5</h1>
+            <h2 className="text-white text- mt-2">Black and White version of the PS5 coming out on sale.</h2>
+            <a href="#" className="text-white mt-2 underline">
+              Shop Now
+            </a>
           </div>
         </div>
+      </div>
 
         <div className='w-11/12 h-full flex flex-col justify-between ml-4'>
-          <div className='flex flex-row justify-between mb-4'>
-            <div className="relative w-full h-[300px] bg-contain bg-center" style={{ backgroundImage: 'url("./img/attractive-woman-wearing-hat-posing-black-background 1.png")' }}>
+          <div className='flex flex-row justify-between mb-4 h-[300px] bg-black rounded-lg '>
+            <div className="relative w-full rounded-lg bg-cover bg-center">
+              <img className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  h-4/5 h-full object-contain' src='./img/attractive-woman-wearing-hat-posing-black-background 1.png' />
               <div className="absolute bottom-0 left-0 p-4">
-                <h1 className="text-white  text-4xl font-bold">Header</h1>
-                <h2 className="text-white  text-2xl font-bold mt-2">Part One</h2>
-                <p className="text-white  text-sm mt-2">Third</p>
+                <h1 className="text-white text-4xl font-bold">Women's Collections</h1>
+                <h2 className="text-white mt-2">Featured woman collections that give you another vibe.</h2>
+                <a href='#' className="text-white mt-2 underline">Shop Now</a>
               </div>
             </div>
           </div>
-          <div className='flex flex-row justify-between'>
-            <div className="relative w-11/12 h-[300px] bg-black object-contain bg-contain bg-center" style={{ backgroundImage: 'url("./img/69-694768_amazon-echo-png-clipart-transparent-amazon-echo-png 1.png")' }}>
-              <div className="absolute bottom-0 left-0 p-4">
-                <h1 className="text-white text-4xl font-bold">Header</h1>
-                <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
-                <p className="text-white text-sm mt-2">Third</p>
-              </div>
-            </div>
 
-            <div className="relative w-11/12 h-[300px] bg-contain bg-black bg-center" style={{ backgroundImage: 'url("./img/652e82cd70aa6522dd785109a455904c.png")' }}>
-              <div className="absolute bottom-0 left-0 p-4">
-                <h1 className="text-white text-4xl font-bold">Header</h1>
-                <h2 className="text-white text-2xl font-bold mt-2">Part One</h2>
-                <p className="text-white text-sm mt-2">Third</p>
-              </div>
+          <div className='flex flex-row justify-between h-[285px]'>
+          <div className="relative w-[49%] rounded-lg bg-black">
+            <img src="./img/69-694768_amazon-echo-png-clipart-transparent-amazon-echo-png 1.png" alt="Speaker" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  h-4/5 h-full object-contain" />
+            <div className="absolute bottom-0 left-0 p-4">
+              <h1 className="text-white text-4xl font-bold">Speakers</h1>
+              <h2 className="text-white mt-2">Amazon wireless speakers</h2>
+              <a href="#" className="text-white mt-2 underline">
+                Shop Now
+              </a>
             </div>
+          </div>
+
+          <div className="relative w-[49%] rounded-lg bg-black">
+            <img src="./img/652e82cd70aa6522dd785109a455904c.png" alt="Perfume" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-10/12 h-10/12 object-contain" />
+            <div className="absolute bottom-0 left-0 p-4">
+              <h1 className="text-white text-4xl font-bold">Perfume</h1>
+              <h2 className="text-white mt-2">GUCCI INTENSE OUD EDP</h2>
+              <a href="#" className="text-white mt-2 underline">
+                Shop Now
+              </a>
+            </div>
+          </div>
           </div>
         </div>
     </div>

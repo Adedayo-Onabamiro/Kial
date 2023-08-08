@@ -10,53 +10,40 @@ export const Footer = () => {
       <div className="w-4/5 py-10 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Tailwind Elements section */}
-          <div> <h6 className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start"> StyleHub </h6> </div>
-
           {/* Products section */}
           <div>
-            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start"> Shop </h6>
-            <p className="mb-4"> Men’s Product</p>
-            <p className="mb-4"> Women’s Product </p>
-            <p className="mb-4"> Winter Edition </p>
-            <p className="mb-4">Accessories </p>
-            <p className="mb-4"> Discounts </p>
+            <h6 className="mb-4 flex justify-center font-bold uppercase md:justify-start"> Exclusive </h6>
+            <p className="mb-4"> Subscribe</p>
+            <p className="mb-4"> Get 10% off your first order </p>
+            <p className="mb-4"> +88015-88888-9999 </p>
           </div>
-
-          {/* Products section */}
-          <div>
-            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start"> Company </h6>
-            <p className="mb-4"> About Us </p>
-            <p className="mb-4"> Careers </p>
-            <p className="mb-4"> Investors </p>
-            <p className="mb-4"> News </p>
-            <p className="mb-4"> Purpose </p>
-          </div>
-
           {/* Products section */}
           <div>
             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start"> Support </h6>
-            <p className="mb-4"> Order Status</p>
-            <p className="mb-4"> Shipping and Delivery </p>
-            <p className="mb-4"> Returns </p>
-            <p className="mb-4"> Payment Option </p>
+            <p className="mb-4"> 111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
+            <p className="mb-4"> exclusive@gmail.com </p>
+            <p className="mb-4"> +88015-88888-9999 </p>
+          </div>
+
+          {/* Account */}
+          <div>
+            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start"> Account </h6>
+            <p className="mb-4"> My Account </p>
+            <p className="mb-4"> Login /  Register </p>
+            <p className="mb-4"> Cart </p>
+            <p className="mb-4"> Wishlist </p>
+            <p className="mb-4"> Shop </p>
+          </div>
+
+          {/* Quick Link */}
+          <div>
+            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start"> Quick Link </h6>
+            <p className="mb-4"> Privacy Policy</p>
+            <p className="mb-4"> Terms Of Use </p>
+            <p className="mb-4"> FAQ </p>
             <p className="mb-4"> Contact </p>
           </div>
 
-        </div>
-      </div>
-
-      {/* Copyright section */}
-
-      <div className="w-4/5 flex items-center justify-center border-t border-white p-8 lg:justify-between">
-        <div className="mr-12 hidden lg:block">
-          <span>Copyright © 2023 • Stylehub.</span>
-        </div>
-        <div className="flex justify-center">
-          <a href="#!" className="mr-6 text-white "> <FontAwesomeIcon icon={faFacebook} /> </a>
-          <a href="#!" className="mr-6 text-white "> <FontAwesomeIcon icon={faTwitter} /> </a>
-          <a href="#!" className="mr-6 text-white"> <FontAwesomeIcon icon={faInstagram} /> </a>
-          <a href="#!" className="mr-6 text-white"> <FontAwesomeIcon icon={faLinkedin} /> </a>
-          <a href="#!" className="text-white "> <FontAwesomeIcon icon={faYoutube} /> </a>
         </div>
       </div>
 
