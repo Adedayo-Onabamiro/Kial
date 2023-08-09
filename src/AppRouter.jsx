@@ -5,6 +5,7 @@ import { Home } from './Pages/Home';
 import { SignUp } from './Pages/SignUp';
 import { Navbar } from './Components/General/Navbar';
 import { Footer } from './Components/General/Footer';
+import { Contact } from './Pages/Contact';
 
 export const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Contact" element={<Contact />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer></Footer>
