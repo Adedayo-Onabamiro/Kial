@@ -6,15 +6,17 @@ import { SignUp } from './Pages/SignUp';
 import { Navbar } from './Components/General/Navbar';
 import { Footer } from './Components/General/Footer';
 import { Contact } from './Pages/Contact';
+import { About } from './Pages/About';
 
 export const AppRouter = () => {
   return (
     <Router>
     <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/About" element={<About />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer></Footer>
