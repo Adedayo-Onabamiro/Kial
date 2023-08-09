@@ -2,6 +2,7 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const SignUp = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -24,7 +25,7 @@ export const SignUp = () => {
                 <input type="password" placeholder="Password" className="w-full border-b border-gray-300 focus:border-gray-500 outline-none px-2 py-1" />
               </div>
               <div className='flex md:w-10/12 w-full md:flex-row flex-col justify-between items-center'>
-                <button className="md:w-4/12 w-full bg-red-500 text-white py-2 rounded-md mb-2">Login</button>
+              <Link to= "/Account" className='w-full'> <button className="md:w-4/12 w-full bg-red-500 text-white py-2 rounded-md mb-2">Login</button> </Link>
                 <p className="text-sm text-red-500">
                   <a href="#" className="underline">Forgot Password?</a>
                 </p>

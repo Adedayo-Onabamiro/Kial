@@ -7,6 +7,7 @@ import { Navbar } from './Components/General/Navbar';
 import { Footer } from './Components/General/Footer';
 import { Contact } from './Pages/Contact';
 import { About } from './Pages/About';
+import { Account } from './Pages/Account';
 
 export const AppRouter = () => {
   return (
@@ -17,6 +18,7 @@ export const AppRouter = () => {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/About" element={<About />} />
+        <Route path="/Account" element={<Account />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer></Footer>
