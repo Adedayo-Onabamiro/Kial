@@ -79,7 +79,7 @@ export const About = () => {
     <>
       <Title title="Our Team" link="Home / Our Team" />
       <div className='md:h-96 my-28 h-auto w-full flex flex-col md:flex-row items-center justify-between'>
-        <div className='w-11/12 py-[5%] px-[8%] border md:w-[48%] h-full flex flex-col items-center md:items-start md:text-left text-center justify-evenly'>
+        <div className='w-11/12 py-[5%] px-[8%] md:w-[48%] h-full flex flex-col items-center md:items-start md:text-left text-center justify-evenly'>
             <p className='text-3xl mb-4 font-semibold'>Our Story</p>
             <p className='mb-4 '> Launced in 2015, Exclusive is South Asia’s premier online shopping makterplace with an active presense in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, Exclusive has 10,500 sallers and 300 brands and serves 3 millioons customers across the region.</p>
             <p className='mb-4 '> Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assotment in categories ranging  from consumer.</p>
