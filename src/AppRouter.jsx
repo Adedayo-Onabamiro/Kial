@@ -8,6 +8,7 @@ import { Footer } from './Components/General/Footer';
 import { Contact } from './Pages/Contact';
 import { About } from './Pages/About';
 import { Account } from './Pages/Account';
+import { Cart } from './Pages/Cart';
 
 export const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRouter = () => {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/About" element={<About />} />
         <Route path="/Account" element={<Account />} />
+        <Route path="/Cart" element={<Cart />} />
         {/* Add more routes as needed */}
       </Routes>
       <Footer></Footer>

@@ -32,7 +32,7 @@ export const Navbar = () => {
                 <FontAwesomeIcon icon={faSearch} className="absolute top-3 right-3 text-gray-300" />
               </div>
               <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" />
-              <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" />
+              <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" /> </Link>
             </div>
 
             <button data-collapse-toggle="navbar-sticky" type="button"

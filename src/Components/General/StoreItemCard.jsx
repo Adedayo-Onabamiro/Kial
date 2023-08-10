@@ -11,7 +11,7 @@ export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, s
     };
   
     return (
-      <div className="w-86 bg-gray-200 relative ">
+      <div className="group w-86 bg-gray-200 relative">
         <div className="overflow-hidden flex items-center justify-center">
           <img src={imgSrc} alt="Item" className="h-52 w-full py-10 object-contain" />
           <div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-lg"> -35% </div>
@@ -53,6 +53,9 @@ export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, s
             <FontAwesomeIcon icon={faEye} className="h-6 w-6 bg-white rounded-full p-1 my-1 text-gray-400" />
           </div>
         </div>
+        {/* Hidden "Add to Cart" button */}
+        <button className="absolute bottom-10 left-0 w-full h-12 bg-black text-white transition duration-300 transform translate-y-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-12"> Add to Cart </button>
+
       </div>
     );
   };
