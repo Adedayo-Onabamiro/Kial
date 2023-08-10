@@ -456,38 +456,6 @@ export const NewArrival = () => {
   );
 }
 
-// export const Attributes = () => {
-//   return (
-//     <div className="flex justify-center w-full items-center">
-//       <div className='w-10/12 flex md:flex-row flex-col items-center justify-between'>
-
-//       <div className="md:w-1/3 w-5/6 p-4 rounded-lg m-2 flex flex-col items-center justify-center text-center">
-//         <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
-//           <img src="./img/icon-delivery.png" alt="Happy Icon" className="w-10 h-10" />
-//         </div>
-//         <h2 className="text-xl font-bold mt-2">FREE AND FAST DELIVERY</h2>
-//         <p className="text-sm text-gray-600">Free delivery for all orders over $140</p>
-//       </div>
-
-//       <div className="md:w-1/3 w-5/6  p-4 rounded-lg mx-2 flex flex-col items-center justify-center text-center">
-//         <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
-//           <img src="./img/Icon-Customer service.png" alt="Happy Icon" className="w-10 h-10" />
-//         </div>
-//         <h2 className="text-xl font-bold mt-2">24/7 CUSTOMER SERVICE</h2>
-//         <p className="text-sm text-gray-600">Friendly 24/7 customer support</p>
-//       </div>
-
-//       <div className="md:w-1/3 w-5/6  p-4 rounded-lg mx-2 flex flex-col items-center justify-center text-center">
-//         <div className="relative w-16 h-16 rounded-full bg-black border-4 border-gray-500 flex items-center justify-center">
-//           <img src="./img/Icon-secure.png" alt="Happy Icon" className="w-10 h-10" />
-//         </div>
-//         <h2 className="text-xl font-bold mt-2">MONEY BACK GUARANTEE</h2>
-//         <p className="text-sm text-gray-600">We reurn money within 30 days</p>
-//       </div>
-//       </div>
-//     </div>
-//   )
-// }
 export const Attributes = ({ data }) => {
   return (
     <div className="flex justify-center w-full items-center">
