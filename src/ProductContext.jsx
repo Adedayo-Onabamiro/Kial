@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-const ProductContext = createContext();
+export const ProductContext = createContext();
 
-function ProductProvider({ children }) {
+export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,4 @@ function ProductProvider({ children }) {
       {children}
     </ProductContext.Provider>
   );
-}
-
-export { ProductContext, ProductProvider };
+};

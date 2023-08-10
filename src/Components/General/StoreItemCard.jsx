@@ -2,34 +2,42 @@ import React, { useState, useEffect,useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 
-
-export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, stars, reviewCount }) => {
+export const StoreItemCard = ({ image, title, price }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    
+    const maxDiscountPercentage = 70; // Maximum discount percentage
+    const randomDiscountPercentage = Math.floor(Math.random() * (maxDiscountPercentage + 1));
+    const discountedPrice = (price * (100 - randomDiscountPercentage)) / 100;
+    const maxRating = 5; // Maximum possible rating value
+    const reviewCount = Math.floor(Math.random() * 400 +1)
+    const rating = Math.floor(Math.random() * 4 +1)
   
     const handleFavoriteClick = () => {
       setIsFavorite(!isFavorite);
     };
   
     return (
-      <div className="group w-86 bg-gray-200 relative">
-        <div className="overflow-hidden flex items-center justify-center">
-          <img src={imgSrc} alt="Item" className="h-52 w-full py-10 object-contain" />
+      <div className="w-86 h-[350px] flex flex-col justify-between bg-white relative border-2 border-gray-200">
+        <div className="group overflow-hidden flex items-center justify-center">
+          <img src={image} alt="Item" className="h-52 w-full py-10 object-contain" />
+            {/* Hidden "Add to Cart" button */}
+            <button className="absolute left-0 w-full h-12 bg-black text-white transition duration-300 transform translate-y-1/2 opacity-0 group-hover:opacity-100 "> Add to Cart </button>
           <div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-lg"> -35% </div>
         </div>
-        <div className="mt-4 bg-white">
+        <div className="mt-4 h-44 border px-2">
           <p className="text-black font-semibold">{title}</p>
           <div className="flex items-center mt-2">
-            <p className="text-gray-500 line-through mr-2">${originalPrice}</p>
-            <p className="text-red-500 font-semibold">${discountedPrice}</p>
+            <p className="text-gray-500 line-through mr-2">${price}</p>
+            <p className="text-red-500 font-semibold">${discountedPrice.toFixed(2)}</p>
           </div>
           <div className="flex items-center mt-2">
             <div className="flex items-center">
-              {[...Array(5)].map((_, index) => (
+              {[...Array(maxRating)].map((_, index) => (
                 <FontAwesomeIcon
                   key={index}
                   icon={faStar}
                   className={`h-5 w-5 ${
-                    index < stars ? 'text-yellow-400' : 'text-gray-300'
+                    index < rating ? 'text-yellow-400' : 'text-gray-300'
                   }`}
                 />
               ))}
@@ -37,7 +45,7 @@ export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, s
             <p className="ml-2">({reviewCount})</p>
           </div>
         </div>
-  
+
         {/* Positioned at the top right */}
         <div className="absolute top-0 right-2 flex flex-col">
           <div className="flex items-center">
@@ -53,9 +61,6 @@ export const StoreItemCard = ({ imgSrc, title, originalPrice, discountedPrice, s
             <FontAwesomeIcon icon={faEye} className="h-6 w-6 bg-white rounded-full p-1 my-1 text-gray-400" />
           </div>
         </div>
-        {/* Hidden "Add to Cart" button */}
-        <button className="absolute bottom-10 left-0 w-full h-12 bg-black text-white transition duration-300 transform translate-y-12 opacity-0 group-hover:opacity-100 group-hover:-translate-y-12"> Add to Cart </button>
-
       </div>
     );
   };

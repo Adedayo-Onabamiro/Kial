@@ -1,6 +1,6 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useContext ,useRef } from 'react';
 import { StoreItemCard } from '../General/StoreItemCard';
-
+import { ProductContext } from '../../ProductContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -169,7 +169,7 @@ export const Todays =({items}) => {
         <div className='w-full h-11 flex flex-row items-center'> <div className='h-full w-6 bg-red-600 rounded-lg'></div> <p className='text-red-600 text-lg font-semibold mx-3'>Today's</p> </div>
         <div className='w-auto h-auto flex flex-row items-end my-2'> <h1 className='text-3xl font-bold md:mr-9'>Flash Sales</h1> <CountdownTimer targetDate={targetDate} /> </div>
         <div className='my-8 w-full flex items-center justify-center'>
-           <StoreItemSlider items={items} /> 
+           <StoreItemSlider /> 
            </div>
         <div className='w-full h-auto flex items-center justify-center'> <button className='bg-red-600 px-4 py-2 text-white'>View All Products</button> </div>
     </div>
@@ -177,13 +177,32 @@ export const Todays =({items}) => {
 }
 
 
-const StoreItemSlider = ({ items }) => {
+const StoreItemSlider = () => {
+  const [products, setProducts] = useState([]);
+  console.log(products);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData(); // Call the fetchData function
+
+  }, []); // Empty dependency array for one-time data fetching
+
+  const productsFromContext = useContext(ProductContext); // Use the context
 
   return (
-    <div className="cards-container flex bg-transparent py-1 space-x-4 relative overflow-x-auto no-scrollbar">
-      {items.map((item, index) => (
-        <div key={index} className="w-80 flex-shrink-0">
-          <StoreItemCard {...item} />
+    <div className="cards-container flex bg-transparent py-4 space-x-4 relative overflow-x-auto no-scrollbar">
+      {productsFromContext.map((product) => (
+        <div key={product.id} className="w-80 flex-shrink-0">
+          <StoreItemCard {...product}  />
         </div>
       ))}
     </div>
