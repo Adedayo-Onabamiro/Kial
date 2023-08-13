@@ -1,87 +1,93 @@
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+
+
 export const Cart = () => {
   return (
     <div className='w-full h-96 my-12 border border-black flex flex-col items-center justify-center'>
-        <div className='w-10/12 h-full border border-black flex'>
+        <div className='w-10/12 h-full border border-black flex flex-col'>
             <span className='flex flex-row w-full h-fit border border-black'> <p className='text-black'>Home / Cart</p> </span>
-            <div className='w-full h-full flex flex-col items-center justify-center'> </div>
+            <div className='w-full h-full flex flex-col items-center justify-center'>
+              <CartComponent></CartComponent>
+            </div>
         </div>
     </div>
   )
 }
 
-// export const CartItem = ({ productName, price }) => {
-//   const [quantity, setQuantity] = useState(1);
 
-//   const handleIncrement = () => {
-//     setQuantity(quantity + 1);
-//   };
 
-//   const handleDecrement = () => {
-//     if (quantity > 1) {
-//       setQuantity(quantity - 1);
-//     }
-//   };
+const CartItem = ({ product, price, quantity, increaseQuantity, decreaseQuantity }) => {
+  return (
+    <div className="cart-item p-4 flex items-center space-x-4 bg-gray-100 my-2">
+      <div className="w-1/4 flex items-center space-x-2">
+        <img src="./img/image 63.png" alt="Product" className="h-8 w-8" />
+        <span>{product}</span>
+      </div>
+      <div className="w-1/4">{price}</div>
+      <div className="w-1/4 flex items-center space-x-2">
+        <button onClick={decreaseQuantity}> <FontAwesomeIcon className='h-5 w-5 text-red-500' icon={faMinus} /> </button>
+        <span>{quantity}</span>
+        <button onClick={increaseQuantity}> <FontAwesomeIcon className='h-5 w-5 text-red-500' icon={faMinus} /> </button>
+      </div>
+      <div className="w-1/4">${(quantity * parseFloat(price.slice(1))).toFixed(2)}</div>
+    </div>
+  );
+};
 
-//   const subtotal = price * quantity;
-//   const delivery = 10.00; // Placeholder for delivery charge
+export const CartComponent = () => {
+  const [items, setItems] = useState([
+    { id: 1, product: 'Item 1', price: '$10', quantity: 2 },
+    { id: 2, product: 'Item 2', price: '$20', quantity: 1 },
+    // ... other items
+  ]);
 
-//   return (
-//     <div className="mb-4 border-b border-gray-300 pb-4">
-//       {/* Product info */}
-//       <div className="flex items-center mb-2">
-//         {/* ... product image, name, etc. ... */}
-//       </div>
+  const increaseQuantity = (itemId) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
 
-//       {/* Quantity */}
-//       <div className="flex items-center mb-2">
-//         <button onClick={handleDecrement} className="text-gray-500">-</button>
-//         <span className="mx-2">{quantity}</span>
-//         <button onClick={handleIncrement} className="text-gray-500">+</button>
-//       </div>
+  const decreaseQuantity = (itemId) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      )
+    );
+  };
 
-//       {/* Subtotal */}
-//       <p>Subtotal: ${subtotal.toFixed(2)}</p>
-//     </div>
-//   );
-// }
+  const total = items.reduce((sum, item) => sum + item.quantity * parseFloat(item.price.slice(1)), 0).toFixed(2);
 
-// export const MainCart = () => {
-//   const items = [
-//     { productName: "Product A", price: 99.99 },
-//     { productName: "Product B", price: 49.99 },
-//     // ... other cart items ...
-//   ];
-
-//   const subtotal = items.reduce((total, item) => total + item.price, 0);
-//   const total = subtotal + 10.00; // Adding delivery charge
-//   const delivery = 10.00; // Defining the delivery charge
-
-//   return (
-//     <div className="bg-white p-8 shadow-md">
-//       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
-      
-//       {items.map((item, index) => (
-//         <CartItem key={index} productName={item.productName} price={item.price} />
-//       ))}
-
-//       <div className="flex items-center justify-between mb-6">
-//         <button className="text-blue-600">Return to Cart</button>
-//         <button className="text-blue-600">Update Cart</button>
-//       </div>
-      
-//       <div className="flex items-center justify-between">
-//         <div>
-//           <p>Subtotal: ${subtotal.toFixed(2)}</p>
-//           <p>Delivery: ${delivery.toFixed(2)}</p>
-//         </div>
-//         <div>
-//           <p className="text-lg font-semibold">Total: ${total.toFixed(2)}</p>
-//           <button className="bg-blue-600 text-white px-4 py-2 rounded">Checkout</button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+  return (
+    <div className="cart-section w-full">
+      <div className="cart-header grid grid-cols-4 p-4 text-start bg-gray-300">
+        <div>Product</div>
+        <div>Price</div>
+        <div>Quantity</div>
+        <div>Subtotal</div>
+      </div>
+      {items.map((item) => (
+        <CartItem
+          key={item.id}
+          product={item.product}
+          price={item.price}
+          quantity={item.quantity}
+          increaseQuantity={() => increaseQuantity(item.id)}
+          decreaseQuantity={() => decreaseQuantity(item.id)}
+        />
+      ))}
+      <div className="cart-total p-4 bg-gray-300">
+        <div className="total-section grid grid-cols-2">
+          <div className="total-label">Total</div>
+          <div className="total-value">${total}</div>
+        </div>
+        {/* ... other total sections */}
+      </div>
+    </div>
+  );
+};
 
