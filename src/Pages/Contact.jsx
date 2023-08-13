@@ -12,7 +12,7 @@ export const Contact = () => {
             <div className='w-10/12 h-full flex flex-col md:flex-row items-center justify-between'>
                 {/* left side */}
                 <div className='w-1/3 m-4 flex flex-col items-center justify-center'>
-                    <div className='h-full w-full bg-white shadow-xl flex flex-col justify-between p-[5%]'>
+                    <div className='h-full w-full bg-white shadow-2xl shadow-inner flex flex-col justify-between p-[5%]'>
                         {/* up */}
                         <div className=' border-b border-black h-[48%] w-full p-5 flex flex-col items-start justify-center'>
                             <span className=' mb-2 w-auto flex flex-row items-center font-semibold'> <FontAwesomeIcon className='bg-red-500 p-2 rounded-full h-6 w-6 mr-4 text-white' icon={faPhone} /> Call To Us </span>
@@ -30,7 +30,7 @@ export const Contact = () => {
                 </div>
                 {/* right side */}
                 <div className='w-2/3 m-4 flex flex-col justify-center'>
-                    <div className='h-full w-full bg-white shadow-xl flex flex-col justify-between p-[5%]'>
+                    <div className='h-full w-full bg-white shadow-2xl shadow-inner flex flex-col justify-between p-[5%]'>
                     <div className="flex flex-col h-full items-center justify-between">
                         {/* First Part */}
                         <div className="flex justify-between w-full space-x-4 mb-4">
