@@ -65,7 +65,7 @@ export const StoreItemCard = ({ image, title, price, description, id }) => {
             />
           </div>
           <div className="flex items-center">
-            <Link to="/ProductDetails"></Link>
+            <Link to="/ProductDetails"> <FontAwesomeIcon onClick={handleEyeClick} icon={faEye} className="h-6 w-6 bg-white rounded-full p-1 my-1 text-gray-400" /> </Link>
           </div>
         </div>
       </div>
