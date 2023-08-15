@@ -1,14 +1,16 @@
 import './App.css';
 import { AppRouter } from './AppRouter';
-import { ProductProvider } from './ProductContext';
+import { ProductProvider, SelectedProductProvider } from './ProductContext';
 
 
 function App() {
   return (
     <ProductProvider>
-    <div className="App">
-      <AppRouter></AppRouter>
-    </div>
+      <SelectedProductProvider>
+        <div className="App">
+          <AppRouter></AppRouter>
+        </div>
+      </SelectedProductProvider>
     </ProductProvider>
   );
 }
