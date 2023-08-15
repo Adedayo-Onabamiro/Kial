@@ -1,10 +1,12 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useRef, useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
+import { SelectedProductContext } from '../../ProductContext';
+import { Link } from 'react-router-dom';
 
-export const StoreItemCard = ({ image, title, price }) => {
+export const StoreItemCard = ({ image, title, price, description, id }) => {
     const [isFavorite, setIsFavorite] = useState(false);
-    
+    const { setSelectedProduct } = useContext(SelectedProductContext);
     const maxDiscountPercentage = 70; // Maximum discount percentage
     const randomDiscountPercentage = Math.floor(Math.random() * (maxDiscountPercentage + 1));
     const discountedPrice = (price * (100 - randomDiscountPercentage)) / 100;
@@ -14,6 +16,11 @@ export const StoreItemCard = ({ image, title, price }) => {
   
     const handleFavoriteClick = () => {
       setIsFavorite(!isFavorite);
+    };
+
+
+    const handleEyeClick = () => {
+      setSelectedProduct({ image, title, price, description, rating, isFavorite });
     };
   
     return (
@@ -58,7 +65,7 @@ export const StoreItemCard = ({ image, title, price }) => {
             />
           </div>
           <div className="flex items-center">
-            <FontAwesomeIcon icon={faEye} className="h-6 w-6 bg-white rounded-full p-1 my-1 text-gray-400" />
+            <Link to="/ProductDetails"></Link>
           </div>
         </div>
       </div>

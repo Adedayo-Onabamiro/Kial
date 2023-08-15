@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
+// Product Context
 export const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
@@ -23,5 +24,18 @@ export const ProductProvider = ({ children }) => {
     <ProductContext.Provider value={products}>
       {children}
     </ProductContext.Provider>
+  );
+};
+
+// Selected Product Context
+export const SelectedProductContext = createContext();
+
+export const SelectedProductProvider = ({ children }) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  return (
+    <SelectedProductContext.Provider value={{ selectedProduct, setSelectedProduct }}>
+      {children}
+    </SelectedProductContext.Provider>
   );
 };
