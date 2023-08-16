@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
-const ProductContext = createContext();
+// Product Context
+export const ProductContext = createContext();
 
-function ProductProvider({ children }) {
+export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -24,6 +25,17 @@ function ProductProvider({ children }) {
       {children}
     </ProductContext.Provider>
   );
-}
+};
 
-export { ProductContext, ProductProvider };
+// Selected Product Context
+export const SelectedProductContext = createContext();
+
+export const SelectedProductProvider = ({ children }) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  return (
+    <SelectedProductContext.Provider value={{ selectedProduct, setSelectedProduct }}>
+      {children}
+    </SelectedProductContext.Provider>
+  );
+};

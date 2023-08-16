@@ -1,8 +1,7 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect,useContext ,useRef } from 'react';
 import { StoreItemCard } from '../General/StoreItemCard';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { ProductContext } from '../../ProductContext';
+import { fetchProducts } from '../../ApiCall';
 
 const items = [
   {
@@ -169,30 +168,36 @@ export const Todays =({items}) => {
         <div className='w-full h-11 flex flex-row items-center'> <div className='h-full w-6 bg-red-600 rounded-lg'></div> <p className='text-red-600 text-lg font-semibold mx-3'>Today's</p> </div>
         <div className='w-auto h-auto flex flex-row items-end my-2'> <h1 className='text-3xl font-bold md:mr-9'>Flash Sales</h1> <CountdownTimer targetDate={targetDate} /> </div>
         <div className='my-8 w-full flex items-center justify-center'>
-           <StoreItemSlider items={items} /> 
+           <StoreItemSlider /> 
            </div>
         <div className='w-full h-auto flex items-center justify-center'> <button className='bg-red-600 px-4 py-2 text-white'>View All Products</button> </div>
     </div>
   )
 }
 
+const StoreItemSlider = () => {
+  const [products, setProducts] = useState([]);
 
-const StoreItemSlider = ({ items }) => {
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchProducts(); // Use the fetchProducts function
+      setProducts(data);
+    }
+
+    fetchData();
+  }, []);
+  const productsFromContext = useContext(ProductContext); // Use the context
 
   return (
-    <div className="cards-container flex bg-transparent py-1 space-x-4 relative overflow-x-auto no-scrollbar">
-      {items.map((item, index) => (
-        <div key={index} className="w-80 flex-shrink-0">
-          <StoreItemCard {...item} />
+    <div className="cards-container flex bg-transparent py-4 space-x-4 relative overflow-x-auto no-scrollbar">
+      {productsFromContext.slice(0, 10).map((product) => (
+        <div key={product.id} className="w-80 flex-shrink-0">
+          <StoreItemCard {...product}  />
         </div>
       ))}
     </div>
   );
 };
-
-
-
-
 
 // todays section code ends
 
@@ -262,68 +267,21 @@ const CategoriesSliderItems = ({ imgSrc, title }) => {
 // This Month section code Starts
 
 export const ThisMonth = () => {
-  const items = [
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p2.png',
-      title: 'KeyBoard',
-      originalPrice: 80,
-      discountedPrice: 622,
-      stars: 5,
-      reviewCount: 20,
-    },
-    {
-      imgSrc: './img/p3.png',
-      title: 'Mia Gony',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p4.png',
-      title: 'SuriMola',
-      originalPrice: 230,
-      discountedPrice: 128,
-      stars: 3,
-      reviewCount: 60,
-    },
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    {
-      imgSrc: './img/p4.png',
-      title: 'SuriMola',
-      originalPrice: 230,
-      discountedPrice: 128,
-      stars: 3,
-      reviewCount: 60,
-    },
-    {
-      imgSrc: './img/p1.png',
-      title: 'Body Louvre',
-      originalPrice: 50,
-      discountedPrice: 32,
-      stars: 4,
-      reviewCount: 80,
-    },
-    
-  ];
-  
   // Slice the first 4 items from the array
-  const itemsToShow = items.slice(0, 4);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchProducts(); // Use the fetchProducts function
+      setProducts(data);
+    }
+
+    fetchData();
+  }, []);
+  const productsFromContext = useContext(ProductContext); // Use the context
+
+  // Generate a random starting index
+  const randomStartingIndex = Math.floor(Math.random() * (productsFromContext.length - 4 + 1));
 
   return (
     <div className='h-auto w-full my-10 items-center justify-center hidden md:flex flex-col'>
@@ -337,9 +295,9 @@ export const ThisMonth = () => {
           <button className='bg-red-600 px-4 py-2 rounded-lg text-white'>View All</button>
         </div>
         <div className='my-8 md:flex'>
-          {itemsToShow.map((item, index) => (
-            <div key={index} className='w-80 md:mr-2'>
-              <StoreItemCard {...item} />
+            {productsFromContext.slice(randomStartingIndex, randomStartingIndex + 4).map((products) => (
+            <div key={products.id} className="w-80 flex-shrink-0">
+              <StoreItemCard {...products}  />
             </div>
           ))}
         </div>
@@ -372,13 +330,26 @@ export const ExploreProducts = () => {
   );
 }
 
-export const ExploreProductsGrid = ({ items }) => {
+export const ExploreProductsGrid = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchProducts(); // Use the fetchProducts function
+      setProducts(data);
+    }
+
+    fetchData();
+  }, []);
+  const productsFromContext = useContext(ProductContext); // Use the context
+  // Generate a random starting index
+  const randomStartingIndex = Math.floor(Math.random() * (productsFromContext.length - 8 + 1));
 
   return (
     <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {items.map((item) => (
-        <div key={item.id} className="p-4">
-          <StoreItemCard {...item} />
+      {productsFromContext.slice(randomStartingIndex, randomStartingIndex + 8).map((products) => (
+        <div key={products.id} className="w-80 flex-shrink-0">
+          <StoreItemCard {...products}  />
         </div>
       ))}
     </div>
