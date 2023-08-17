@@ -1,15 +1,17 @@
 import './App.css';
 import { AppRouter } from './AppRouter';
-import { ProductProvider, SelectedProductProvider } from './ProductContext';
+import { CartProvider, ProductProvider, SelectedProductProvider } from './ProductContext';
 
 
 function App() {
   return (
     <ProductProvider>
       <SelectedProductProvider>
-        <div className="App">
-          <AppRouter></AppRouter>
-        </div>
+        <CartProvider>
+          <div className="App">
+            <AppRouter></AppRouter>
+          </div>
+        </CartProvider>
       </SelectedProductProvider>
     </ProductProvider>
   );

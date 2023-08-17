@@ -2,25 +2,29 @@ import React, { useState, useEffect,useRef, useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 import { SelectedProductContext } from '../../ProductContext';
+import { CartContext } from '../../ProductContext';
 import { Link } from 'react-router-dom';
 
-export const StoreItemCard = ({ image, title, price, description, id }) => {
+export const StoreItemCard = ({ image, title, price, description, id, rating:{count}, rating:{rate} }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const { setSelectedProduct } = useContext(SelectedProductContext);
+    const { addToCart } = useContext(CartContext); // Added
     const maxDiscountPercentage = 70; // Maximum discount percentage
-    const randomDiscountPercentage = Math.floor(Math.random() * (maxDiscountPercentage + 1));
-    const discountedPrice = (price * (100 - randomDiscountPercentage)) / 100;
+    // const randomDiscountPercentage = Math.floor(Math.random() * (maxDiscountPercentage + 1));
+    const discountedPrice = (price * (100 - 7)) / 100;
     const maxRating = 5; // Maximum possible rating value
-    const reviewCount = Math.floor(Math.random() * 400 +1)
     const rating = Math.floor(Math.random() * 4 +1)
   
     const handleFavoriteClick = () => {
       setIsFavorite(!isFavorite);
     };
 
-
     const handleEyeClick = () => {
       setSelectedProduct({ image, title, price, description, rating, isFavorite });
+    };
+
+    const handleAddToCartClick = () => {
+      addToCart({ id, image, title, price, quantity: 1 }); // Add the product to cart
     };
   
     return (
@@ -28,7 +32,7 @@ export const StoreItemCard = ({ image, title, price, description, id }) => {
         <div className="group overflow-hidden flex items-center justify-center">
           <img src={image} alt="Item" className="h-52 w-full py-10 object-contain" />
             {/* Hidden "Add to Cart" button */}
-            <button className="absolute left-0 w-full h-12 bg-black text-white transition duration-300 transform translate-y-1/2 opacity-0 group-hover:opacity-100 "> Add to Cart </button>
+            <button onClick={handleAddToCartClick} className="absolute left-0 w-full h-12 bg-black text-white transition duration-300 transform translate-y-1/2 opacity-0 group-hover:opacity-100 "> Add to Cart </button>
           <div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-lg"> -35% </div>
         </div>
         <div className="mt-4 h-44 border px-2">
@@ -44,12 +48,12 @@ export const StoreItemCard = ({ image, title, price, description, id }) => {
                   key={index}
                   icon={faStar}
                   className={`h-5 w-5 ${
-                    index < rating ? 'text-yellow-400' : 'text-gray-300'
+                    index < rate ? 'text-yellow-400' : 'text-gray-300'
                   }`}
                 />
               ))}
             </div>
-            <p className="ml-2">({reviewCount})</p>
+            <p className="ml-2">({count})</p>
           </div>
         </div>
 

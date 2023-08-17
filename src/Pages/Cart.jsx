@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus } from '@fortawesome/free-solid-svg-icons';
-
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CartContext } from '../ProductContext';
 
 export const Cart = () => {
   return (
@@ -19,18 +18,18 @@ export const Cart = () => {
 
 
 
-const CartItem = ({ product, price, quantity, increaseQuantity, decreaseQuantity }) => {
+const CartItem = ({img, product, price, quantity, increaseQuantity, decreaseQuantity }) => {
   return (
     <div className="cart-item p-4 flex items-center space-x-4 bg-gray-100 my-2">
       <div className="w-1/4 flex items-center space-x-2">
-        <img src="./img/image 63.png" alt="Product" className="h-8 w-8" />
+        <img src={img} alt="Product" className="h-8 w-8" />
         <span>{product}</span>
       </div>
       <div className="w-1/4">{price}</div>
       <div className="w-1/4 flex items-center space-x-2">
         <button onClick={decreaseQuantity}> <FontAwesomeIcon className='h-5 w-5 text-red-500' icon={faMinus} /> </button>
         <span>{quantity}</span>
-        <button onClick={increaseQuantity}> <FontAwesomeIcon className='h-5 w-5 text-red-500' icon={faMinus} /> </button>
+        <button onClick={increaseQuantity}> <FontAwesomeIcon className='h-5 w-5 text-red-500' icon={faPlus} /> </button>
       </div>
       <div className="w-1/4">${(quantity * parseFloat(price.slice(1))).toFixed(2)}</div>
     </div>
@@ -38,29 +37,7 @@ const CartItem = ({ product, price, quantity, increaseQuantity, decreaseQuantity
 };
 
 export const CartComponent = () => {
-  const [items, setItems] = useState([
-    { id: 1, product: 'Item 1', price: '$10', quantity: 2 },
-    { id: 2, product: 'Item 2', price: '$20', quantity: 1 },
-    // ... other items
-  ]);
-
-  const increaseQuantity = (itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  const decreaseQuantity = (itemId) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-      )
-    );
-  };
-
-  const total = items.reduce((sum, item) => sum + item.quantity * parseFloat(item.price.slice(1)), 0).toFixed(2);
+  const { cartItems, increaseQuantity, decreaseQuantity, total } = useContext(CartContext);
 
   return (
     <div className="cart-section w-full">
@@ -70,9 +47,10 @@ export const CartComponent = () => {
         <div>Quantity</div>
         <div>Subtotal</div>
       </div>
-      {items.map((item) => (
+      {cartItems.map((item) => (
         <CartItem
           key={item.id}
+          img = {item.image}
           product={item.product}
           price={item.price}
           quantity={item.quantity}
