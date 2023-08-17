@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart, faShoppingCart, faBars } from '@fortawesome/free-solid-svg-icons';
 import { TopBanner } from './TopBanner';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../ProductContext';
 
 
 export const Navbar = () => {
@@ -11,6 +12,12 @@ export const Navbar = () => {
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
+
+  const { cartItems } = useContext(CartContext);
+
+  // Calculate total quantity of items in the cart
+  const totalItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
 
   return (
     <div className='w-full h-auto '>
@@ -32,7 +39,8 @@ export const Navbar = () => {
                 <FontAwesomeIcon icon={faSearch} className="absolute top-3 right-3 text-gray-300" />
               </div>
               <Link to="/ProductDetails"> <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" /> </Link>
-              <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" /> </Link>
+              <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" />         <span className="cart-count">{totalItemCount}</span>
+ </Link>
             </div>
 
             <button data-collapse-toggle="navbar-sticky" type="button"

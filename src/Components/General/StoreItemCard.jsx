@@ -25,6 +25,7 @@ export const StoreItemCard = ({ image, title, price, description, id, rating:{co
 
     const handleAddToCartClick = () => {
       addToCart({ id, image, title, price, quantity: 1 }); // Add the product to cart
+      
     };
   
     return (

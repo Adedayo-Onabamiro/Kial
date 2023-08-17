@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //this isnt just where product context is, but other contexts as well actually
 
@@ -47,9 +49,12 @@ export const CartContext = createContext();
 
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const initialCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const [cartItems, setCartItems] = useState(initialCartItems);
 
   const addToCart = (product) => {
+    // const [showNotification, setShowNotification] = useState(false);
+
     // Check if the product is already in the cart
     const existingItem = cartItems.find(item => item.id === product.id);
   
@@ -62,10 +67,14 @@ export const CartProvider = ({ children }) => {
     } else {
       // Ensure price is in the correct format
       const formattedPrice = typeof product.price === 'string' ? product.price : `$${product.price.toFixed(2)}`;
-  
+
       setCartItems(prevItems => [...prevItems, { ...product, quantity: 1, price: formattedPrice }]);
     }
+
+
   };
+
+  
 
   const increaseQuantity = (itemId) => {
     setCartItems(prevItems =>
@@ -85,9 +94,31 @@ export const CartProvider = ({ children }) => {
 
   const total = cartItems.reduce((sum, item) => sum + item.quantity * parseFloat(item.price.slice(1)), 0).toFixed(2);
 
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+
   return (
     <CartContext.Provider value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, total }}>
       {children}
     </CartContext.Provider>
   );
 };
+
+//this is the pop up that shows when item added to cart
+// export const Notification = ({ message }) => {
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   useEffect(() => {
+//     setIsVisible(true);
+//     const timer = setTimeout(() => {
+//       setIsVisible(false);
+//     }, 3000); // Hide after 3 seconds
+
+//     return () => clearTimeout(timer);
+//   }, []);
+
+//   return isVisible ? <div className="notification">{message}</div> : null;
+// };
