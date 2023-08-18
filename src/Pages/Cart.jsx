@@ -5,9 +5,9 @@ import { CartContext } from '../ProductContext';
 
 export const Cart = () => {
   return (
-    <div className='w-full h-auto my-12 border border-black flex flex-col items-center justify-center'>
-        <div className='w-10/12 h-full border border-black flex flex-col'>
-            <span className='flex flex-row w-full h-fit border border-black'> <p className='text-black'>Home / Cart</p> </span>
+    <div className='w-full h-auto my-12 flex flex-col items-center justify-center'>
+        <div className='w-10/12 h-full flex flex-col'>
+            <span className='flex flex-row w-full h-fit my-2'> <p className='text-black'>Home / Cart</p> </span>
             <div className='w-full h-full flex flex-col items-center justify-center'>
               <CartComponent></CartComponent>
             </div>
@@ -41,7 +41,7 @@ export const CartComponent = () => {
 
   return (
     <div className="cart-section w-full">
-      <div className="cart-header grid grid-cols-4 p-4 text-start bg-gray-300">
+      <div className="cart-header grid grid-cols-4 sm:p-4 font-bold text-start">
         <div>Product</div>
         <div>Price</div>
         <div>Quantity</div>
@@ -58,9 +58,9 @@ export const CartComponent = () => {
           decreaseQuantity={() => decreaseQuantity(item.id)}
         />
       ))}
-      <div className="cart-total p-4 bg-gray-300">
-        <div className="total-section grid grid-cols-2">
-          <div className="total-label">Total</div>
+      <div className="cart-total p-4 font-bold">
+        <div className="total-section flex">
+          <div className="total-label mr-5">Total:</div>
           <div className="total-value">${total}</div>
         </div>
         {/* ... other total sections */}
