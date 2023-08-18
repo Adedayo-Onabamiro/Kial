@@ -16,8 +16,8 @@ export const HomeCategories = () => {
   ];
 
   return (
-    <div className="w-10/12 h-96 flex flex-row items-center justify-between">
-      <div className="w-auto h-full flex flex-col">
+    <div className="w-10/12 h-auto flex flex-col-reverse md:flex-row items-center justify-between">
+      <div className="md:w-auto w-full h-full flex-wrap justify-center my-10 md:my-0 flex flex-row md:flex-col">
         {categories.map((category, index) => (
           <a
             key={index}
@@ -28,7 +28,7 @@ export const HomeCategories = () => {
           </a>
         ))}
       </div>
-      <div className=" w-4/5 h-full">
+      <div className="w-full md:w-4/5 h-96">
         <Slideshow></Slideshow>
       </div>
     </div>
@@ -41,7 +41,7 @@ export const HomeCatSliderItem = (props) => {
     <div className='w-full h-full border bg-black flex flex-row items-center justify-between '>
       <div className='w-1/2 h-5/6 px-[5%] flex flex-col justify-evenly'>
         <span className='flex flex-row items-center'> <img className='h-10 w-10 object-contain' src={`./img/${logo}`} alt='miniImg' /> <p className='text-white'>{title}</p> </span>
-        <h2 className='text-5xl font-semibold w-10/12 text-white'> Up to 10% off Voucher </h2>
+        <h2 className='text-xl md:text-3xl lg:text-5xl font-semibold md:w-10/12 text-white'> Up to 10% off Voucher </h2>
         <span className='flex flex-row items-center text-center'> <a href='#'> <p className='text-white underline inline-block'>Shop Now</p> <FontAwesomeIcon className='text-white text-lg px-2' icon={faArrowRight} /> </a></span>
       </div>
 

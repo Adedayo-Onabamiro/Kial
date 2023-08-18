@@ -87,11 +87,13 @@ export const CartProvider = ({ children }) => {
   const decreaseQuantity = (itemId) => {
     setCartItems(prevItems =>
       prevItems.map(item =>
-        item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-      )
+        item.id === itemId ? 
+          (item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : null) 
+          : item
+      ).filter(item => item !== null)
     );
   };
-
+  
   const total = cartItems.reduce((sum, item) => sum + item.quantity * parseFloat(item.price.slice(1)), 0).toFixed(2);
 
 

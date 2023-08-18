@@ -5,7 +5,7 @@ import { CartContext } from '../ProductContext';
 
 export const Cart = () => {
   return (
-    <div className='w-full h-96 my-12 border border-black flex flex-col items-center justify-center'>
+    <div className='w-full h-auto my-12 border border-black flex flex-col items-center justify-center'>
         <div className='w-10/12 h-full border border-black flex flex-col'>
             <span className='flex flex-row w-full h-fit border border-black'> <p className='text-black'>Home / Cart</p> </span>
             <div className='w-full h-full flex flex-col items-center justify-center'>

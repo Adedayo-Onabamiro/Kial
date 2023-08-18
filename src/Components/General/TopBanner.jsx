@@ -45,8 +45,8 @@ export const Dropdown = () => {
   };
 export const TopBanner = () => {
   return (
-    <div className='w-full px-[5%] h-auto border border-black bg-black flex flex-row justify-between'>
-        <p className='text-white flex items-center justify-center text-center ml-10 py-4 w-[85%] '>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a className='mx-6 underline' href='#'>ShopNow </a> </p>
+    <div className='w-full md:px-[5%] h-auto border border-black bg-black flex flex-col md:flex-row justify-between'>
+        <p className='text-white flex items-center justify-center text-center md:ml-10 py-4 w-auto md:w-[85%] '>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a className='mx-6 underline' href='#'>ShopNow </a> </p>
         <Dropdown></Dropdown>
     </div>
   )
