@@ -1,6 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { createContext, useState, useEffect } from 'react';
 
 //this isnt just where product context is, but other contexts as well actually
 

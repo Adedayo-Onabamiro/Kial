@@ -147,7 +147,7 @@ export const CountdownTimer = ({ targetDate }) => {
   }, []);
 
   return (
-    <div className="border md:w-fit h-auto flex flex-row justify-evenly">
+    <div className="md:w-fit h-auto flex flex-row justify-evenly">
       {Object.entries(timeLeft).map(([unit, value], index, arr) => (
         <div key={unit} className="text-center px-1">
           <p className="text-sm text-gray-500 uppercase">{unit}</p>
@@ -166,7 +166,7 @@ export const Todays =({items}) => {
   return (
     <div className='h-auto w-11/12 my-10 flex flex-col'>
         <div className='w-full h-11 flex flex-row items-center'> <div className='h-full w-6 bg-red-600 rounded-lg'></div> <p className='text-red-600 text-lg font-semibold mx-3'>Today's</p> </div>
-        <div className='w-auto border justify-between md:justify-normal h-auto flex flex-row items-end my-2'> <h1 className='text-lg sm:text-2xl md:text-3xl font-bold md:mr-9'>Flash Sales</h1> <CountdownTimer targetDate={targetDate} /> </div>
+        <div className='w-auto justify-between md:justify-normal h-auto flex flex-row items-end my-2'> <h1 className='text-lg sm:text-2xl md:text-3xl font-bold md:mr-9'>Flash Sales</h1> <CountdownTimer targetDate={targetDate} /> </div>
         <div className='my-8 w-full flex items-center justify-center'>
            <StoreItemSlider /> 
            </div>
