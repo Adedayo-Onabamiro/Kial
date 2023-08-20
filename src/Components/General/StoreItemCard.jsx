@@ -1,24 +1,28 @@
-import React, { useState, useEffect,useRef, useContext} from 'react';
+import React, { useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 import { SelectedProductContext } from '../../ProductContext';
-import { CartContext } from '../../ProductContext';
+import { CartContext, FavoriteContext } from '../../ProductContext';
 import { Link } from 'react-router-dom';
 
 export const StoreItemCard = ({ image, title, price, description, id, rating:{count}, rating:{rate} }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
     const { setSelectedProduct } = useContext(SelectedProductContext);
     const { addToCart } = useContext(CartContext); // Added
-    const maxDiscountPercentage = 70; // Maximum discount percentage
-    // const randomDiscountPercentage = Math.floor(Math.random() * (maxDiscountPercentage + 1));
     const discountedPrice = (price * (100 - 7)) / 100;
     const maxRating = 5; // Maximum possible rating value
     const rating = Math.floor(Math.random() * 4 +1)
   
+    const { addToFavorite, favoriteItems, removeFromFavorite } = useContext(FavoriteContext);
+  
+    const isFavorite = favoriteItems.some((item) => item.id === id);
+  
     const handleFavoriteClick = () => {
-      setIsFavorite(!isFavorite);
+      if (isFavorite) {
+        removeFromFavorite(id);
+      } else {
+        addToFavorite({ id, image, title, price, description});
+      }
     };
-
     const handleEyeClick = () => {
       setSelectedProduct({ image, title, price, description, rating, isFavorite });
     };

@@ -45,7 +45,6 @@ export const SelectedProductProvider = ({ children }) => {
 // CartContext.js
 export const CartContext = createContext();
 
-
 export const CartProvider = ({ children }) => {
   const initialCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   const [cartItems, setCartItems] = useState(initialCartItems);
@@ -71,8 +70,6 @@ export const CartProvider = ({ children }) => {
 
 
   };
-
-  
 
   const increaseQuantity = (itemId) => {
     setCartItems(prevItems =>
@@ -122,3 +119,41 @@ export const CartProvider = ({ children }) => {
 
 //   return isVisible ? <div className="notification">{message}</div> : null;
 // };
+
+
+//Favorite Context
+export const FavoriteContext = createContext();
+
+export const FavoriteProvider = ({ children }) => {
+  const initialFavoriteItems = JSON.parse(localStorage.getItem('favoriteItems')) || [];
+  const [favoriteItems, setFavoriteItems] = useState(initialFavoriteItems);
+
+  const addToFavorite = (product) => {
+    setFavoriteItems((prevItems) => [...prevItems, product]);
+    console.log("added to fave")
+  };
+
+  const removeFromFavorite = (productId) => {
+    setFavoriteItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
+    console.log("removed to fave")
+  };
+
+  const isFavorite = (productId) => {
+    return favoriteItems.some((item) => item.id === productId);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
+
+  return (
+    <FavoriteContext.Provider
+      value={{ favoriteItems, addToFavorite, removeFromFavorite, isFavorite }}
+    >
+      {children}
+    </FavoriteContext.Provider>
+  );
+};

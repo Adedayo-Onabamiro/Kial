@@ -1,6 +1,6 @@
 import './App.css';
 import { AppRouter } from './AppRouter';
-import { CartProvider, ProductProvider, SelectedProductProvider } from './ProductContext';
+import { CartProvider, FavoriteProvider, ProductProvider, SelectedProductProvider } from './ProductContext';
 
 
 function App() {
@@ -8,9 +8,11 @@ function App() {
     <ProductProvider>
       <SelectedProductProvider>
         <CartProvider>
-          <div className="App">
-            <AppRouter></AppRouter>
-          </div>
+          <FavoriteProvider>
+            <div className="App">
+              <AppRouter></AppRouter>
+            </div>
+          </FavoriteProvider>
         </CartProvider>
       </SelectedProductProvider>
     </ProductProvider>
