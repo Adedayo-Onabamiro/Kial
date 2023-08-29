@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import { AppRouter } from './AppRouter';
 import { CartProvider, FavoriteProvider, ProductProvider, SelectedProductProvider } from './ProductContext';
@@ -5,17 +6,18 @@ import { CartProvider, FavoriteProvider, ProductProvider, SelectedProductProvide
 
 function App() {
   return (
-    <ProductProvider>
-      <SelectedProductProvider>
-        <CartProvider>
-          <FavoriteProvider>
-            <div className="App">
-              <AppRouter></AppRouter>
-            </div>
-          </FavoriteProvider>
-        </CartProvider>
-      </SelectedProductProvider>
-    </ProductProvider>
+        <ProductProvider>
+          <SelectedProductProvider>
+            <CartProvider>
+              <FavoriteProvider>
+                <div className="App">
+                  <AppRouter></AppRouter>
+                  <ToastContainer></ToastContainer>
+                </div>
+              </FavoriteProvider>
+            </CartProvider>
+          </SelectedProductProvider>
+      </ProductProvider>
   );
 }
 
