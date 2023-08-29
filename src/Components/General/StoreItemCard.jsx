@@ -5,12 +5,14 @@ import { SelectedProductContext } from '../../ProductContext';
 import { CartContext, FavoriteContext } from '../../ProductContext';
 import { Link } from 'react-router-dom';
 
-export const StoreItemCard = ({ image, title, price, description, id, rating:{count}, rating:{rate} }) => {
+export const StoreItemCard = ({ image, title, price, description, id, rating = {} }) => {
+  const { count, rate } = rating;
+
     const { setSelectedProduct } = useContext(SelectedProductContext);
     const { addToCart } = useContext(CartContext); // Added
     const discountedPrice = (price * (100 - 7)) / 100;
     const maxRating = 5; // Maximum possible rating value
-    const rating = Math.floor(Math.random() * 4 +1)
+    // const rating = Math.floor(Math.random() * 4 +1)
   
     const { addToFavorite, favoriteItems, removeFromFavorite } = useContext(FavoriteContext);
   
@@ -20,11 +22,11 @@ export const StoreItemCard = ({ image, title, price, description, id, rating:{co
       if (isFavorite) {
         removeFromFavorite(id);
       } else {
-        addToFavorite({ id, image, title, price, description});
+        addToFavorite({ id, image, title, price, description, rating, count});
       }
     };
     const handleEyeClick = () => {
-      setSelectedProduct({ image, title, price, description, rating, isFavorite });
+      setSelectedProduct({ image, title, price, description, rating, isFavorite, count });
     };
 
     const handleAddToCartClick = () => {
