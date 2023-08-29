@@ -38,7 +38,7 @@ export const Navbar = () => {
                 />
                 <FontAwesomeIcon icon={faSearch} className="absolute top-3 right-3 text-gray-300" />
               </div>
-              <Link to="/ProductDetails"> <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" /> </Link>
+              <Link to="/Favorites"> <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" /> </Link>
               <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" /> <span className="cart-count">{totalItemCount}</span> </Link>
             </div>
 

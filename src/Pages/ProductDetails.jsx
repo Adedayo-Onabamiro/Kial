@@ -4,7 +4,7 @@ import { fetchProducts } from '../ApiCall';
 import { StoreItemCard } from '../Components/General/StoreItemCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faEye, faStar } from '@fortawesome/free-solid-svg-icons';
-import { SelectedProductContext } from '../ProductContext';
+import { SelectedProductContext,CartContext , FavoriteContext } from '../ProductContext';
 
 export const ProductDetails = () => {
 
@@ -56,28 +56,53 @@ export const RelatedItem = () => {
 
 export const LayoutExample = () => {
   const { selectedProduct } = useContext(SelectedProductContext);
-  const [count, setCount] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-
+  const { isFavorite, addToFavorite, removeFromFavorite } = useContext(FavoriteContext);
+  const { addToCart } = useContext(CartContext); // Added
+  const [counterCount, setCounterCount] = useState(0); // Use a different name to avoid conflict
+  const discountedPrice = parseFloat(
+    ((selectedProduct.price * (100 - 7)) / 100).toFixed(2)
+  );
+  
   if (!selectedProduct) {
     return <div>No product selected.</div>;
   }
 
   const maxRating = 5; // Maximum possible rating value
-  const rating = Math.floor(Math.random() * 4 + 1);
+  // const rating = Math.floor(Math.random() * 4 + 1);
 
-  const increment = () => {
-    setCount(count + 1);
-  };
 
-  const decrement = () => {
-    setCount(count - 1);
-  };
+  // const increment = () => {
+  //   setCounterCount(counterCount + 1);
+  // };
+
+  // const decrement = () => {
+  //   setCounterCount(counterCount - 1);
+  // };
 
   const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
+    if (isFavorite(selectedProduct.id)) {
+      removeFromFavorite(selectedProduct.id);
+    } else {
+      addToFavorite(selectedProduct);
+    }
   };
+  
+  const handleBuyNowClick = () => {
+    // Create a new cart item object
+    const cartItem = {
+      id: selectedProduct.id,
+      image: selectedProduct.image,
+      title: selectedProduct.title,
+      price: selectedProduct.price,
+      quantity: counterCount, // Use the counter count
+    };
+  
+    // Add the cart item to the cart
+    addToCart(cartItem);
+  
+    // You might also want to navigate to the cart page or show a success message
+  };
+  
 
   return (
     <div className="container flex md:flex-row flex-col items-center justify-between mx-auto p-4">
@@ -96,32 +121,32 @@ export const LayoutExample = () => {
               {[...Array(maxRating)].map((_, index) => (
                 <FontAwesomeIcon key={index} icon={faStar}
                   className={`h-5 w-5 ${
-                    index < rating ? 'text-yellow-400' : 'text-gray-300'
+                    index < selectedProduct.rating ? 'text-yellow-400' : 'text-gray-300'
                   }`}
                 />
               ))}
-              <p className="ml-2">450</p>
+              <p className="ml-2"> {selectedProduct.count} </p>
             </div>
-            <p className='text-xl my-2'>{selectedProduct.price}</p>
+            <p className='text-xl my-2'>${discountedPrice}</p>
             <p className='my-2'> {selectedProduct.description} </p>
             
             {/* Count and buy buttons */}
             <div className="my-2 w-full flex flex-col md:flex-row justify-between items-start md:items-center">
-              <div className="border border-black rounded my-2">
+              {/* <div className="border border-black rounded my-2">
                 <button onClick={decrement}> <span role="img" aria-label="Minus" className="border-r border-gray-500 px-3">➖</span> </button>
-                <span className="px-3 mx-2"> {count} </span>
+                <span className="px-3 mx-2"> {counterCount} </span>
                 <button onClick={increment}> <span role="img" aria-label="Plus" className="border-l border-gray-500 px-3">➕</span> </button>
-              </div>
-              <div> <button className="bg-red-500 rounded text-white p-2 px-8 my-2">Buy Now</button> </div>
+              </div> */}
+              <div> <button onClick={handleBuyNowClick} className="bg-red-500 rounded text-white p-2 px-8 my-2">Buy Now</button> </div>
               <div className="border border-black rounded my-2"> 
                 <div className="flex items-center">
-                  <FontAwesomeIcon
-                    icon={faHeart}
-                    className={`h-6 w-6 p-1 my-1 cursor-pointer ${
-                      isFavorite ? 'text-red-500' : 'text-gray-300'
-                    }`}
-                    onClick={handleFavoriteClick}
-                  />
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className={`h-6 w-6 p-1 my-1 cursor-pointer ${
+                    isFavorite(selectedProduct.id) ? 'text-red-500' : 'text-gray-300'
+                  }`}
+                  onClick={handleFavoriteClick}
+                />
                 </div>
               </div>
             </div>

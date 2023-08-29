@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //this isnt just where product context is, but other contexts as well actually
 
@@ -45,14 +47,17 @@ export const SelectedProductProvider = ({ children }) => {
 // CartContext.js
 export const CartContext = createContext();
 
-
 export const CartProvider = ({ children }) => {
   const initialCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   const [cartItems, setCartItems] = useState(initialCartItems);
 
   const addToCart = (product) => {
-    // const [showNotification, setShowNotification] = useState(false);
-
+    toast.success('Added To Cart!', {
+      position: 'top-center',
+      autoClose: 1000, // Close the toast after 3 seconds
+      hideProgressBar: true,
+      closeOnClick: true,
+    });
     // Check if the product is already in the cart
     const existingItem = cartItems.find(item => item.id === product.id);
   
@@ -71,8 +76,6 @@ export const CartProvider = ({ children }) => {
 
 
   };
-
-  
 
   const increaseQuantity = (itemId) => {
     setCartItems(prevItems =>
@@ -107,18 +110,50 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-//this is the pop up that shows when item added to cart
-// export const Notification = ({ message }) => {
-//   const [isVisible, setIsVisible] = useState(false);
+//Favorite Context
+export const FavoriteContext = createContext();
 
-//   useEffect(() => {
-//     setIsVisible(true);
-//     const timer = setTimeout(() => {
-//       setIsVisible(false);
-//     }, 3000); // Hide after 3 seconds
+export const FavoriteProvider = ({ children }) => {
+  const initialFavoriteItems = JSON.parse(localStorage.getItem('favoriteItems')) || [];
+  const [favoriteItems, setFavoriteItems] = useState(initialFavoriteItems);
 
-//     return () => clearTimeout(timer);
-//   }, []);
+  const addToFavorite = (product) => {
+    setFavoriteItems((prevItems) => [...prevItems, product]);
+        // Display a success toast
+        toast.success('Added To Favorite!', {
+          autoClose: 1000, // Close the toast after 3 seconds
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+  };
 
-//   return isVisible ? <div className="notification">{message}</div> : null;
-// };
+  const removeFromFavorite = (productId) => {
+    setFavoriteItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
+        // Display a success toast
+        toast.success('Removed From Favorite!', {
+          position: 'top-center',
+          autoClose: 1000, // Close the toast after 3 seconds
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+  };
+
+  const isFavorite = (productId) => {
+    return favoriteItems.some((item) => item.id === productId);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('favoriteItems', JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
+
+  return (
+    <FavoriteContext.Provider
+      value={{ favoriteItems, addToFavorite, removeFromFavorite, isFavorite }}
+    >
+      {children}
+    </FavoriteContext.Provider>
+  );
+};
