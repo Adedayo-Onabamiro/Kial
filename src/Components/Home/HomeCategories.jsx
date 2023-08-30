@@ -7,12 +7,13 @@ export const HomeCategories = () => {
     'Woman’s Fashion',
     'Men’s Fashion',
     'Electronics',
-    'Home & Lifestyle',
-    'Medicine',
-    'Sports & Outdoor',
-    'Baby’s & Toys',
-    'Groceries & Pets',
-    'Health & Beauty',
+    'Jewelry',
+    // 'Home & Lifestyle',
+    // 'Medicine',
+    // 'Sports & Outdoor',
+    // 'Baby’s & Toys',
+    // 'Groceries & Pets',
+    // 'Health & Beauty',
   ];
 
   return (
@@ -57,19 +58,19 @@ const categories = [
     logo: "./applelogo.png",
   },
   {
-    imgSrc: "./apple.png",
-    title: "iPhone 13 Series",
-    logo: "./applelogo.png",
+    imgSrc: "./gpods.webp",
+    title: "SailMan Bluetooth",
+    logo: "./gpods.webp",
   },
   {
-    imgSrc: "./apple.png",
-    title: "iPhone 12 Series",
-    logo: "./applelogo.png",
+    imgSrc: "./bigheadphone.webp",
+    title: "Beats Headphones",
+    logo: "./bigheadphone.webp",
   },
   {
-    imgSrc: "apple.png",
-    title: "iPhone 11 Series",
-    logo: "applelogo.png",
+    imgSrc: "./speakerfak.webp",
+    title: "Hugh Bass Speaker",
+    logo: "./speakerfak.webp",
   },
 ];
 

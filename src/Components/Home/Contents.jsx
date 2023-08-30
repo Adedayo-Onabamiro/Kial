@@ -125,12 +125,25 @@ export const CountdownTimer = ({ targetDate }) => {
     let timeLeft = {};
 
     if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
+      const targetTime = new Date(targetDate);
+      const newTargetTime = new Date(targetTime);
+      newTargetTime.setDate(newTargetTime.getDate() - 3);
+      newTargetTime.setHours(5);
+      newTargetTime.setMinutes(12);
+
+      difference < newTargetTime - new Date()
+        ? (timeLeft = {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60),
+          })
+        : (timeLeft = {
+            days: 3,
+            hours: 5,
+            minutes: 12,
+            seconds: 0,
+          });
     }
 
     return timeLeft;
@@ -147,11 +160,11 @@ export const CountdownTimer = ({ targetDate }) => {
   }, []);
 
   return (
-    <div className="md:w-fit h-auto flex flex-row justify-evenly">
+    <div className="md:w-fit h-auto flex flex-row mx-10 justify-evenly">
       {Object.entries(timeLeft).map(([unit, value], index, arr) => (
         <div key={unit} className="text-center px-1">
           <p className="text-sm text-gray-500 uppercase">{unit}</p>
-          <p className=" text-lg sm:text-2xl md:text-3xl  font-bold">
+          <p className="text-lg sm:text-2xl md:text-3xl font-bold">
             {value.toString().padStart(2, '0')}
             {index !== arr.length - 1 && <span className="px-1">:</span>}
           </p>
@@ -160,6 +173,8 @@ export const CountdownTimer = ({ targetDate }) => {
     </div>
   );
 };
+
+
 export const Todays =({items}) => {
   const targetDate = '2023-12-31T00:00:00'; // Set your target date here
 
@@ -207,28 +222,28 @@ export const Categories = () => {
   const CategoriesItems = [
     {
       imgSrc: './img/Category-CellPhone.png',
-      title: 'Phones',
+      title: 'Gadgets',
     },
     {
-      imgSrc: './img/Category-Computer.png',
-      title: 'Computers',
+      imgSrc: './img/jewelrypic.jpg',
+      title: 'Jewelry',
     },
     {
-      imgSrc: './img/Category-Smartwatch.png',
-      title: 'SmartWatch',
+      imgSrc: './img/hanger.jpg',
+      title: "Men's Clothing",
     },
     {
       imgSrc: './img/Category-Camera.png',
-      title: 'Camera',
+      title: "Women's Clothing",
     },
-    {
-      imgSrc: './img/Category-Headphone.png',
-      title: 'HeadPhones',
-    },
-    {
-      imgSrc: './img/Category-CellPhone.png',
-      title: 'CellPhone',
-    },
+    // {
+    //   imgSrc: './img/Category-Headphone.png',
+    //   title: 'HeadPhones',
+    // },
+    // {
+    //   imgSrc: './img/Category-CellPhone.png',
+    //   title: 'CellPhone',
+    // },
     
   ];
   
