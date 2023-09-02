@@ -1,18 +1,59 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart, faShoppingCart, faBars } from '@fortawesome/free-solid-svg-icons';
 import { TopBanner } from './TopBanner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../ProductContext';
-
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from '../../firebase/config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [displayName, setdisplayName] = useState("")
+  const navigate = useNavigate()
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
 
+  const logoutUser = () => {
+    signOut(auth).then(() => {
+      toast.success("Logout successful", {
+        autoClose: 1000, // Close the toast after 3 seconds
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+      navigate("/Auth")
+    }).catch((error) => {
+      toast.error(error.message, {
+        autoClose: 1000, // Close the toast after 3 seconds
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
+    });
+  }
+
+  //monitor current user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setdisplayName(user.displayName)
+        if (user.displayName == null){
+          const ul = user.email.substring(0, user.email.indexOf("@"));
+          const uName = ul.charAt(0).toUpperCase() + ul.slice(1);
+          setdisplayName(uName);
+        }
+      } else {
+        setdisplayName("")
+      }
+    });
+  
+  }, [])
+
+  const isAuthenticated = !!displayName;
   const { cartItems } = useContext(CartContext);
 
   // Calculate total quantity of items in the cart
@@ -40,6 +81,7 @@ export const Navbar = () => {
               </div>
               <Link to="/Favorites"> <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" /> </Link>
               <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" /> <span className="cart-count">{totalItemCount}</span> </Link>
+              <p> {displayName} </p>
             </div>
 
             <button data-collapse-toggle="navbar-sticky" type="button"
@@ -56,10 +98,13 @@ export const Navbar = () => {
               <li> <Link to="/" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} aria-current="page"> Home </Link> </li>
               <li> <Link to="/Contact" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Contact </Link> </li>
               <li> <Link to="/About" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > About </Link> </li>
-              <li> <Link to="/SignUp" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Signup </Link> </li>
+              {isAuthenticated ? (
+                <li> <Link to="/Auth" onClick={logoutUser} className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Sign Out </Link> </li>
+              ) : (
+                <li> <Link to="/Auth" className={`block py-2 pl-3 pr-4 rounded hover:underline text-black`} > Sign In </Link> </li>
+              )}
             </ul>
           </div>
-
         </div>
       </nav>
     </div>
