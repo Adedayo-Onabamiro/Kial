@@ -120,7 +120,7 @@ const LoginForm = ({ setShowLogin, setShowReset }) => {
     <>
       {isLoading && <Loader /> }
       <form onSubmit={loginUser} className="flex h-full flex-col md:items-start items-center justify-between">
-      <h1 className="md:text-4xl text-xl text-center font-bold mb-4">Log in to Exclusive</h1>
+      <h1 className="md:text-4xl text-xl text-center font-bold mb-4">Log in to Kial</h1>
       <p className="text-sm text-gray-600 mb-4 text-center">Enter your details below</p>
       <div className="md:w-10/12 w-full mb-4">
         <input
