@@ -116,6 +116,10 @@ const LoginForm = ({ setShowLogin, setShowReset }) => {
       });
   }
 
+  //note, the firebase error that shows when google login is used, is cos the form calls the login user
+  //function, so the best thing is to find a way to only call that function when the user uses the login and call googleLogin function
+  //depending on how the user registers
+
   return (
     <>
       {isLoading && <Loader /> }
