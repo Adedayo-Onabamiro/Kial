@@ -71,14 +71,14 @@ export const Navbar = () => {
           <div className="flex md:order-2">
             <div className="flex items-center space-x-4 mx-4">
               {/* Search bar */}
-              <div className="hidden md:block relative">
+              {/* <div className="hidden md:block relative">
                 <input
                   type="text"
                   placeholder="Search..."
                   className="px-4 py-2 rounded-lg bg-gray-200 text-black placeholder-gray-700"
                 />
                 <FontAwesomeIcon icon={faSearch} className="absolute top-3 right-3 text-gray-300" />
-              </div>
+              </div> */}
               <Link to="/Favorites"> <FontAwesomeIcon icon={faHeart} className="text-black text-xl hover:text-gray-300" /> </Link>
               <Link to="/Cart"> <FontAwesomeIcon icon={faShoppingCart} className="text-black text-xl hover:text-gray-300" /> <span className="cart-count">{totalItemCount}</span> </Link>
               <p> {displayName} </p>
